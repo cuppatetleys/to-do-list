@@ -17,16 +17,34 @@
 
     <body>
       <h1>to do list<h1/>
+        <div id="div1">
+          <form>
 
-        <form action="getToDo()">
-
-          <input style="width: 35%;" type="text" name="todo" id="todoText" placeholder="type your next to do item here">
-          <br><button type="button" onclick="getToDo()">Add to-do</button>
-        </form>
+            <input style="width: 35%;" type="text" name="todo" id="todoText" placeholder="type your next to do item here">
+            <!--<br><button type="button" onclick="getToDo()">Add to-do</button>-->
+          </form>
+      </div>
         <script>
-          function getToDo() {
-            var x = document.getElementById("todoText").value;
-            alert(x);
+
+
+          document.addEventListener("keypress", function (event) {
+            if (event.key === 'Enter') {  //checks whether the pressed key is "Enter"
+                var listItem = document.getElementById("todoText").value;
+                //alert("key pressed")
+                getToDo(listItem);
+                event.preventDefault();
+            }
+          });
+
+          function getToDo(message) {
+            //alert(message);
+            var para = document.createElement("p");
+            var node = document.createTextNode(message);
+            para.appendChild(node);
+
+            var element = document.getElementById("div1");
+            element.appendChild(para);
+            document.getElementById("todoText").value = "";
             }
           </script>
     <body/>
