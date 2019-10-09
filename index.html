@@ -24,6 +24,8 @@
             <!--<br><button type="button" onclick="getToDo()">Add to-do</button>-->
           </form>
       </div>
+      <div id="checkboxes">
+      </div>
         <script>
           var todoCount = 0;
 
@@ -31,25 +33,69 @@
             if (event.key === 'Enter') {  //checks whether the pressed key is "Enter"
                 var listItem = document.getElementById("todoText").value;
                 //alert("key pressed")
-                getToDo(listItem);
+                if(listItem != "")
+                {
+                  getToDo(listItem);
+                }
+
                 event.preventDefault();
             }
           });
 
-          function getToDo(message) {
+          function attachCheckBoxHandlers()
+          {
+            // get reference to element containing toppings checkboxes
+            var el = document.getElementById('checkboxes');
+            /*if (el== null) {
+              return;
+            }*/
+
+            // get reference to input elements in toppings container element
+            var boxes = el.getElementsByTagName('input');
+
+            // assign updateTotal function to onclick property of each checkbox
+            for (var i=0, len=boxes.length; i<len; i++) {
+                if ( boxes[i].type === 'checkbox' ) {
+                    boxes[i].onclick = CheckOffItem;
+                  }
+                }
+          }
+
+          //attachCheckBoxHandlers();
+
+          function getToDo(message)
+          {
             //alert(message);
             var para = document.createElement("p");
             var newItem = document.createElement("input");
             newItem.setAttribute("type", "checkbox");
             newItem.id = 'checkbox' + (todoCount + 1); // need unique Ids!
+            //newItem.onclick = "CheckOffItem()";
             para.appendChild(newItem);
             var itemText = document.createTextNode(message);
             para.appendChild(itemText);
 
-            var element = document.getElementById("div1");
+            var element = document.getElementById("checkboxes");
             element.appendChild(para);
             document.getElementById("todoText").value = "";
+            attachCheckBoxHandlers();
             }
+
+          function CheckOffItem()
+          {
+            //alerts with the text in the list
+            //alert(this.parentNode.textContent);
+            if (this.checked) {
+              this.parentNode.style.textDecoration = "line-through";
+            }
+            else {
+              this.parentNode.style.textDecoration = "none";
+            }
+
+          }
+
+
+
           </script>
     <body/>
   </head>
