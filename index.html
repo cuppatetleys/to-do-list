@@ -43,6 +43,8 @@
             newItem.setAttribute("type", "checkbox");
             newItem.id = 'checkbox' + (todoCount + 1); // need unique Ids!
             para.appendChild(newItem);
+            var itemText = document.createTextNode(message);
+            para.appendChild(itemText);
 
             var element = document.getElementById("div1");
             element.appendChild(para);
