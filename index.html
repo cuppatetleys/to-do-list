@@ -25,8 +25,13 @@
           </form>
       </div>
       <div id="checkboxes">
-        <ol id="taskList">
-        </ol>
+        <table id="taskList">
+        </table>
+      </div>
+
+      <div class="bottomText">
+        press enter add todo item <p>
+        made by <a href="https://0xpgamdev.wordpress.com" style="color: #4d4d4d;">Chris Coldicott</a>
       </div>
         <script>
           var todoCount = 0;
@@ -67,25 +72,20 @@
                 }
           }
 
-          //attachCheckBoxHandlers();
-
           function getToDo(message)
           {
-            //alert(message);
-            var para = document.createElement("li");
+            var todoTable = document.getElementById("taskList");
+            var row = todoTable.insertRow(-1);
+            var cell = row.insertCell(-1);
+
             var newItem = document.createElement("input");
             newItem.setAttribute("type", "checkbox");
             newItem.id = 'checkbox' + (todoCount + 1); // need unique Ids!
-            //newItem.onclick = "CheckOffItem()";
-            para.appendChild(newItem);
-            var itemText = document.createTextNode(message);
-            para.appendChild(itemText);
-            /*var cross = document.createElement("a");
-            cross.className = "close";
-            para.appendChild(cross);*/
 
-            var element = document.getElementById("taskList");
-            element.appendChild(para);
+            cell.appendChild(newItem);
+            var itemText = document.createTextNode(message);
+            cell.appendChild(itemText);
+
             document.getElementById("todoText").value = "";
             attachCheckBoxHandlers();
             }
@@ -105,10 +105,12 @@
 
           function EditEntry()
           {
-            //we get here, it works.
-            alert("editing entry");
-          }
 
+            //var originalText = this.parentNode.textContent;
+            //this.parentNode.textContent = "";
+
+
+          }
 
           </script>
     <body/>
