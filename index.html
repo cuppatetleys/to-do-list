@@ -13,18 +13,20 @@
    <!-- CSS from the styles.css file I made-->
    <link href="styles.css" rel="stylesheet">
 
-   <title>to do list</title>
+   <title>TodoMVC by Chris Coldicott</title>
 
     <body>
-      <h1>to do list<h1/>
+      <h1>todo<h1/>
         <div id="div1">
           <form>
 
-            <input style="width: 35%;" type="text" name="todo" id="todoText" placeholder="type your next to do item here">
+            <input class="InputBox" type="text" name="todo" id="todoText" placeholder="What needs to be done?">
             <!--<br><button type="button" onclick="getToDo()">Add to-do</button>-->
           </form>
       </div>
       <div id="checkboxes">
+        <ol id="taskList">
+        </ol>
       </div>
         <script>
           var todoCount = 0;
@@ -55,9 +57,13 @@
 
             // assign updateTotal function to onclick property of each checkbox
             for (var i=0, len=boxes.length; i<len; i++) {
-                if ( boxes[i].type === 'checkbox' ) {
+                if ( boxes[i].type === 'checkbox' )
+                {
                     boxes[i].onclick = CheckOffItem;
-                  }
+                }
+                //works
+                boxes[i].parentNode.ondblclick = EditEntry;
+
                 }
           }
 
@@ -66,7 +72,7 @@
           function getToDo(message)
           {
             //alert(message);
-            var para = document.createElement("p");
+            var para = document.createElement("li");
             var newItem = document.createElement("input");
             newItem.setAttribute("type", "checkbox");
             newItem.id = 'checkbox' + (todoCount + 1); // need unique Ids!
@@ -74,8 +80,11 @@
             para.appendChild(newItem);
             var itemText = document.createTextNode(message);
             para.appendChild(itemText);
+            /*var cross = document.createElement("a");
+            cross.className = "close";
+            para.appendChild(cross);*/
 
-            var element = document.getElementById("checkboxes");
+            var element = document.getElementById("taskList");
             element.appendChild(para);
             document.getElementById("todoText").value = "";
             attachCheckBoxHandlers();
@@ -94,6 +103,11 @@
 
           }
 
+          function EditEntry()
+          {
+            //we get here, it works.
+            alert("editing entry");
+          }
 
 
           </script>
